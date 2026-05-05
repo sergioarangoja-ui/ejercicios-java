@@ -1,0 +1,133 @@
+// asesino java 
+import java.util.Scanner;
+
+public class MiPrograma 
+{
+    public static void main(String[] args) 
+    {
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("-----Hola, detective-----");
+
+        System.out.print("¿Cuál es tu nombre? ");
+        String nombre = teclado.nextLine();
+
+        System.out.print("¿Cuál es tu edad? ");
+        int edad = teclado.nextInt();
+
+        if (edad < 12) 
+        {
+            System.out.println("Eres muy joven para ser detective.");
+            teclado.close();
+            return;
+        } 
+         else if (edad <= 17) 
+        
+        {
+            System.out.println("Detective junior.");
+        } 
+        else if (edad <= 59) 
+        {
+            System.out.println("Bienvenido al equipo.");
+        } 
+        else
+        {
+            System.out.println("Detective senior.");
+        }
+
+        teclado.nextLine(); 
+
+        int pistas = 0;
+        int opcion;
+        boolean casoResuelto = false;
+
+        String[][] evidencias = 
+        {
+            {"Huella en la ventana"},
+            {"Copa sospechosa"},
+            {"Nota rota"},
+            {"Cuchillo"}
+        };
+
+        String[] sospechosos = {"Victoria", "Aurelio", "Simon", "Bruno"};
+
+ 
+        while (!casoResuelto) 
+        {
+
+            System.out.println("\n--menu --");
+            System.out.println("1. Ver pistas por sospechoso");
+            System.out.println("2. Interrogar");
+            System.out.println("3. Ingresar cuántas pistas tienes");
+            System.out.println("4. Resolver caso");
+            System.out.print("Elige: ");
+            opcion = teclado.nextInt();
+            teclado.nextLine();
+
+            switch (opcion)
+            {
+
+                case 1:
+                    System.out.println("\n--pistas --");
+                    for (int i = 0; i < evidencias.length; i++) {
+                        System.out.println("\n" + sospechosos[i] + ":");
+                        for (int j = 0; j < evidencias[i].length; j++) 
+                        {
+                            System.out.println("- " + evidencias[i][j]);
+                        }
+                    }
+                    break;
+
+                case 2:
+                    System.out.println("\n--interrogatorio --");
+                    for (int i = 0; i < sospechosos.length; i++) 
+                    {
+                        System.out.println(sospechosos[i] + ": Dice que es inocente...");
+                    }
+                    break;
+
+                case 3:
+                    do {
+                        System.out.print("¿Cuántas pistas tienes? ");
+                        pistas = teclado.nextInt();
+
+                        if (pistas <= 0) 
+                        {
+                            System.out.println("Ingresa un número válido.");
+                        }
+                    }
+                    while (pistas <= 0);
+
+                    teclado.nextLine();
+                    break;
+
+                case 4:
+                    if (pistas >= 3) 
+                    {
+
+                        System.out.print("¿Quién es el culpable? ");
+                        String culpable = teclado.nextLine();
+
+                        if (culpable.equalsIgnoreCase("Aurelio")) 
+                        {
+                            System.out.println("¡Correcto!");
+                            System.out.println("Caso resuelto, detective " + nombre);
+                            casoResuelto = true;
+                        } else 
+                        {
+                            System.out.println("Incorrecto...");
+                           System.out.println("Vuelve a investigar y ajusta tus pistas.");
+                        }
+                    } else 
+                    {
+                        System.out.println("Necesitas al menos 3 pistas.");
+                    }
+                    break;
+                default:
+                    System.out.println("Opción inválida.");
+            }
+        }
+        System.out.println("\nCaso cerrado.");
+        teclado.close();
+    }
+}
