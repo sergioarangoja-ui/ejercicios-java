@@ -1,0 +1,456 @@
+import java.util.Scanner;
+class Agente 
+{
+    protected int id;
+    protected String nombre;
+    protected String agencia;
+    protected String rango;
+    public Agente() 
+    {
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("\n--- Registrar Agente ---");
+
+        System.out.print("ID del agente: ");
+        this.id = teclado.nextInt();
+        teclado.nextLine();
+
+        System.out.print("Nombre del agente: ");
+        this.nombre = teclado.nextLine();
+
+        System.out.print("Agencia: ");
+        this.agencia = teclado.nextLine();
+
+        System.out.print("Rango: ");
+        this.rango = teclado.nextLine();
+    }
+    public void reportar() 
+    {
+       System.out.println(" " + nombre + " reporta a " + agencia);
+    }
+
+    public String obtenerInfo()
+    {
+        return nombre + " [" + rango + "]";
+    }
+}
+class Espia
+{
+
+    protected String nombreClave;
+    protected String zonaVigilada;
+    protected int horaInicio;
+
+    public Espia(String nombreClave, String zonaVigilada, int horaInicio)
+    {
+
+        this.nombreClave = nombreClave;
+        this.zonaVigilada = zonaVigilada;
+        this.horaInicio = horaInicio;
+    }
+
+    public void reportarTurno()
+    {
+
+        System.out.println(
+                "El agente " + nombreClave
+                + " vigila la zona "
+                + zonaVigilada
+                + " desde las "
+                + horaInicio + ":00 horas");
+    }
+
+    public String obtenerInfo()
+    {
+
+        return nombreClave + " [Espía nocturno]";
+    }
+}
+
+
+class Policia
+{
+    protected int id;
+    protected String nombre;
+    protected String apellido;
+    protected String rango;
+    protected String interrogatorio;
+
+    public Policia() 
+    {
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("\n--- Registrar Policía ---");
+
+        System.out.print("ID del policía: ");
+        this.id = teclado.nextInt();
+        teclado.nextLine();
+
+        System.out.print("Nombre: ");
+        this.nombre = teclado.nextLine();
+
+        System.out.print("Apellido: ");
+        this.apellido = teclado.nextLine();
+
+        System.out.print("Rango: ");
+        this.rango = teclado.nextLine();
+    }
+
+    public void interrogar() 
+    {
+        System.out.println(" " + nombre + " " + apellido + " interroga a sospechosos.");
+    }
+
+    public String obtenerInfo() 
+    {
+        return nombre + " " + apellido + " [" + interrogatorio + "]";
+    }
+}
+
+
+class Forense
+{
+    protected int id;
+    protected String nombre;
+    protected String apellido;
+    protected String bitacora;
+
+    public Forense()
+    {
+
+        Scanner teclado = new Scanner(System.in);
+
+        System.out.println("\n--- Registrar Forense ---");
+
+        System.out.print("ID del forense: ");
+        this.id = teclado.nextInt();
+        teclado.nextLine();
+
+        System.out.print("Nombre: ");
+        this.nombre = teclado.nextLine();
+
+        System.out.print("Apellido: ");
+        this.apellido = teclado.nextLine();
+
+        System.out.print("Bitácora / Especialidad: ");
+        this.bitacora = teclado.nextLine();
+    }
+
+    public void reportar()
+    {
+        System.out.println(" " + nombre + " " + apellido + " hará su reporte.");
+    }
+
+    public String obtenerInfo() 
+    {
+        return nombre + " " + apellido + " [" + bitacora + "]";
+    }
+}
+
+
+public class Main {
+
+    public static void main(String[] args) 
+    {
+
+        Scanner teclado = new Scanner(System.in);
+
+        String nombre;
+        int pistas = 0;
+        int opcion;
+        boolean casoResuelto = false;
+
+        System.out.println(" DESPACHO HOLMES & ASOCIADOS ");
+        System.out.println(" Caso #1: HIDDEN ");
+        System.out.println("================================");
+
+        System.out.println("\nRegistro del equipo asignado al caso:");
+
+        Agente agente = new Agente();
+        Policia policia = new Policia();
+        Forense forense = new Forense();
+
+     
+        Espia espia = new Espia(
+                "Halcón Nocturno",
+                "Bloque de Ingenierías",
+                0
+        );
+
+        System.out.println("\n================================");
+
+        System.out.println("Equipo registrado:");
+
+        System.out.println(" - " + agente.obtenerInfo());
+        System.out.println(" - " + policia.obtenerInfo());
+        System.out.println(" - " + forense.obtenerInfo());
+
+       
+        System.out.println(" - " + espia.obtenerInfo());
+
+     
+        System.out.print("\nDetective, ¿cuál es tu nombre? ");
+        nombre = teclado.nextLine();
+        System.out.print("¿Cuál es tu edad? ");
+        int edad = teclado.nextInt();
+        teclado.nextLine();
+        if (edad < 12) 
+        {
+
+        System.out.println("Eres muy joven para ser detective. Vuelve cuando crezcas.");
+            teclado.close();
+            return;
+        } 
+        else if (edad <= 17)
+        {
+
+     System.out.println("Puedes ser un detective junior. ¡Bienvenido, " + nombre + "!");
+
+        } 
+        else if (edad <= 59) 
+        {
+
+            System.out.println("Bienvenido al equipo de detectives, " + nombre + ".");
+
+        }
+        else 
+        {
+
+        System.out.println("Detective senior con experiencia. Un honor, " + nombre + ".");
+        }
+
+        System.out.println("\nTu misión: resolver el caso HIDDEN.");
+        System.out.println("Necesitas al menos 3 pistas para resolverlo.");
+
+        System.out.println("Los sospechosos son:");
+        System.out.println(" 1. James Barnes");
+        System.out.println(" 2. Aurelio Vásquez");
+        System.out.println(" 3. Victoria Reyes");
+        System.out.println(" 4. Bruno Quiroga");
+
+        System.out.println("\nReporte inicial del equipo:");
+        agente.reportar();
+        policia.interrogar();
+        forense.reportar();
+        espia.reportarTurno();
+
+        do 
+        {
+
+            System.out.println("\n--- MENÚ DEL DETECTIVE ---");
+
+            System.out.println("1. Buscar pistas");
+            System.out.println("2. Interrogar sospechoso");
+            System.out.println("3. Resolver el caso");
+            System.out.println("4. Ver estado del equipo");
+            System.out.println("5. Rendirse y salir");
+
+            System.out.print("Elige una opción (1-5): ");
+
+            opcion = teclado.nextInt();
+            teclado.nextLine();
+
+            switch (opcion) 
+            {
+
+                case 1:
+
+                    System.out.println("\nBUSCANDO PISTAS...");
+
+                    System.out.println(" " + forense.nombre + " "
+                            + forense.apellido
+                            + " analiza la escena del crimen.");
+
+                    // MENSAJE DEL ESPIA
+                    System.out.println(" " + espia.nombreClave
+                            + " vigila movimientos sospechosos en "
+                            + espia.zonaVigilada + ".");
+
+                    String[] evidencias = {
+                            "Huella digital en la ventana",
+                            "Copa de vino con residuos",
+                            "Nota rasgada en el escritorio",
+                            "Cuchillo en la cocina"
+                    };
+
+                    int i = 0;
+
+                    while (i < evidencias.length)
+                    {
+
+                        pistas++;
+
+                        System.out.println(" Pista #" + pistas + ": " + evidencias[i]);
+
+                        i++;
+                    }
+
+                    System.out.println("Total de pistas acumuladas: " + pistas);
+
+                    break;
+
+                case 2:
+
+                    System.out.println("\nINTERROGATORIOS");
+
+                    System.out.println(" " + policia.obtenerInfo()
+                            + " está listo para interrogar.");
+                    System.out.println("¿A quién deseas interrogar?");
+                    System.out.println(" 1. James Barnes");
+                    System.out.println(" 2. Aurelio Vásquez");
+                    System.out.println(" 3. Victoria Reyes");
+                    System.out.println(" 4. Bruno Quiroga");
+                    System.out.print("Elige un sospechoso (1-4): ");
+
+                    int elegido = teclado.nextInt();
+                    teclado.nextLine();
+
+                    switch (elegido) 
+                    {
+
+                        case 1:
+
+                            System.out.println(" Interrogando a: James Barnes");
+
+                            break;
+
+                        case 2:
+
+                            System.out.println(" Interrogando a: Aurelio Vásquez");
+
+                            break;
+
+                        case 3:
+
+                            System.out.println(" Interrogando a: Victoria Reyes");
+
+                            break;
+
+                        case 4:
+
+                            System.out.println(" Interrogando a: Bruno Quiroga");
+
+                            break;
+
+                        default:
+
+                            System.out.println(" Sospechoso no válido.");
+
+                            break;
+                    }
+
+                    break;
+
+                case 3:
+
+                    System.out.println("\nRESOLUCIÓN DEL CASO");
+
+                    System.out.println(" " + agente.obtenerInfo()
+                            + " coordina la acusación.");
+
+                    if (pistas < 3) 
+                    {
+
+                        System.out.println(
+                                " Tienes " + pistas + " pista(s). Necesitas al menos 3.");
+
+                        System.out.println(" ¡Sigue investigando!");
+
+                    } 
+                    else 
+                    {
+
+                        System.out.println(
+                                " Tienes " + pistas + " pistas. Es hora de acusar.");
+
+                        System.out.println(" ¿A quién señalas como culpable?");
+
+                        System.out.println(" 1. James Barnes");
+                        System.out.println(" 2. Aurelio Vásquez");
+                        System.out.println(" 3. Victoria Reyes");
+                        System.out.println(" 4. Bruno Quiroga");
+
+                        System.out.print(" Elige al culpable (1-4): ");
+
+                        int acusado = teclado.nextInt();
+                        teclado.nextLine();
+
+                        if (acusado == 2) 
+                        {
+
+                            System.out.println(
+                                    "\n ¡CORRECTO, detective " + nombre + "!");
+
+                            System.out.println(
+                                    " Aurelio Vásquez es el culpable.");
+
+                            System.out.println(" ¡CASO RESUELTO!");
+
+                            agente.reportar();
+
+                          
+                            espia.reportarTurno();
+
+                            casoResuelto = true;
+
+                        } 
+                        else 
+                        {
+
+                            System.out.println("\n ¡Acusación INCORRECTA!");
+
+                            pistas = 0;
+
+                            System.out.println(
+                                    " Tus pistas han sido descartadas. Vuelve a investigar.");
+                        }
+                    }
+
+                    break;
+
+                case 4:
+
+                    System.out.println("\n--- ESTADO DEL EQUIPO ---");
+
+                    System.out.println(" " + agente.obtenerInfo());
+                    agente.reportar();
+
+                    System.out.println(" " + policia.obtenerInfo());
+                    policia.interrogar();
+
+                    System.out.println(" " + forense.obtenerInfo());
+                    forense.reportar();
+
+                   
+                    System.out.println(" " + espia.obtenerInfo());
+                    espia.reportarTurno();
+
+                    System.out.println(" Pistas recolectadas: " + pistas);
+
+                    break;
+
+                case 5:
+
+                    System.out.println("\nTe retiras del caso...");
+                    System.out.println("El caso HIDDEN queda sin resolver.");
+
+                    casoResuelto = true;
+
+                    break;
+
+                default:
+
+                    System.out.println("Opción no válida. Elige entre 1 y 5.");
+
+                    break;
+            }
+
+        } while (!casoResuelto);
+
+        System.out.println(
+                "\nGracias por jugar, detective " + nombre + ". Caso cerrado.");
+
+        teclado.close();
+    }
+}
